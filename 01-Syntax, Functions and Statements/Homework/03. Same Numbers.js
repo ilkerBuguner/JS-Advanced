@@ -1,18 +1,18 @@
 function solve(num){
-    let numAsString = toString(num);
-    let prevNum = 0;
+    let numAsString = num.toString();
+    let prevNum = Number(numAsString[0]);
     let isSameNum = true;
-    let sum = 0;
-    for(i = 0; i < numAsString.length; i++){
+    let sum = Number(numAsString[0]);
+
+    for(i = 1; i <= numAsString.length - 1; i++){
         let currentNum = Number(numAsString[i]);
-        if(currentNum !== 0 && currentNum !== prevNum){
+        if(currentNum !== prevNum){
             isSameNum = false;
         }
         sum += currentNum;
+        prevNum = currentNum;
     }
 
     console.log(isSameNum);
     console.log(sum);
 }
-
-solve(2222222);
