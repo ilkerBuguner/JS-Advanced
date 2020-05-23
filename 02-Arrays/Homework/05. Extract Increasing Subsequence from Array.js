@@ -5,7 +5,7 @@ function solve(arr) {
     for(let i = 0; i < arr.length; i++) {
         let currentNum = Number(arr[i]);
 
-        if(currentNum > currentMaxNum){
+        if(currentNum >= currentMaxNum){
             result.push(currentNum);
             currentMaxNum = currentNum
         }
