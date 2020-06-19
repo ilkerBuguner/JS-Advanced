@@ -23,7 +23,7 @@
     };
 
     Array.prototype.sum = function() {
-        return this.reduce((acc, curr) => { acc + curr, 0});
+        return this.reduce((acc, curr) => acc + curr, 0);
     };
 
     Array.prototype.average = function() {
