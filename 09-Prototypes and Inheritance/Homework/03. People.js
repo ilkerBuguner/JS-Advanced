@@ -47,7 +47,7 @@ function getPeoples() {
         }
 
         collectSalary() {
-            console.log(`${this.name} received ${this.salary + this.divident} this month.`)
+            console.log(`${this.name} received ${this.salary + this.dividend} this month.`)
         }
     }
 
