@@ -1,24 +1,36 @@
 function solve() {
     document.querySelector('button').addEventListener('click', addBook);
     const totalStoreProfitTag = document.querySelectorAll('h1')[1];
+    const oldBookSection = document.getElementById('outputs').children[0].children[1];
+    let newBooksSection = document.getElementById('outputs').children[1].children[1];
+
     function addBook(e) {
         e.preventDefault();
         const bookTitle = document.querySelectorAll('input')[0].value;
-        const bookYear = document.querySelectorAll('input')[1].value;
-        const bookPrice = document.querySelectorAll('input')[2].value;
+        const bookYear = Number(document.querySelectorAll('input')[1].value);
+        const bookPrice = Number(document.querySelectorAll('input')[2].value);
 
         if(bookTitle && bookYear > 0 && bookPrice > 0) {
-            let newBooksSection = document.getElementById('outputs').children[1].children[1];
-
-            let newBook = el('div', [
+            if(bookYear >= 2000) {
+              let newBook = el('div', [
                 el('p', `${bookTitle} [${bookYear}]`),
-                el('button', `Buy it only for ${Number(bookPrice).toFixed(2)} BGN`),
+                el('button', `Buy it only for ${bookPrice.toFixed(2)} BGN`),
                 el('button', 'Move to old section')
-            ] , {className: 'book'})
+              ] , {className: 'book'})
 
             newBook.children[1].addEventListener('click', buyBook);
             newBook.children[2].addEventListener('click', moveToOldSection);
             newBooksSection.appendChild(newBook);
+            } else {
+              const bookNewPrice = bookPrice - (bookPrice * 0.15);
+              let newBook = el('div', [
+                el('p', `${bookTitle} [${bookYear}]`),
+                el('button', `Buy it only for ${bookNewPrice.toFixed(2)} BGN`),
+              ] , {className: 'book'})
+
+              newBook.children[1].addEventListener('click', buyBook);
+              oldBookSection.appendChild(newBook);
+            }
         }
     }
 
@@ -32,7 +44,6 @@ function solve() {
     }
 
     function moveToOldSection(e) {
-        const oldBookSection = document.getElementById('outputs').children[0].children[1];
         const notCuttedBookPrice = e.target.previousSibling.textContent.replace( /^\D+/g, '');
         const cuttedBookPrice = Number(notCuttedBookPrice.substring(0, notCuttedBookPrice.length - 4));
         const bookNewPrice = cuttedBookPrice - (cuttedBookPrice * 0.15);
